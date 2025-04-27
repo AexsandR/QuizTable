@@ -87,7 +87,7 @@ namespace QuizTable.ViewModels
         #endregion
         #region переключение туров
         /// <summary>
-        /// Переключает на следующий тур
+        /// Переключает на следующий тур, и если не была запущена анимация, то он все сам обновит
         /// </summary>
         /// <returns>
         /// true - переключение выполнено успешно
@@ -95,9 +95,10 @@ namespace QuizTable.ViewModels
         /// </returns>
         public bool NextTour()
         {
-            SortingParticipants();
             if (Teams[0].Tour == Teams[0].Points.Length)
                 return false;
+            SortingParticipants();
+
             foreach (var team in Teams)
             {
                 team.Tour++;
@@ -106,7 +107,7 @@ namespace QuizTable.ViewModels
             return true;
         }
         /// <summary>
-        /// Переключает на предыдущий тур
+        /// Переключает на предыдущий тур, и если не была запущена анимация, то он все сам обновит
         /// </summary>
         /// <returns>
         /// true - переключение выполнено успешно
@@ -116,9 +117,11 @@ namespace QuizTable.ViewModels
         {
             if (Teams[0].Tour == 0)
                 return false;
+            SortingParticipants();
+
             foreach (var team in Teams)
             {
-                team.Tour--;
+                team.Tour++;
                 OnPropertyChanged("Teams");
             }
             return true;
