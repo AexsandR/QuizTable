@@ -1,0 +1,17 @@
+﻿<Window x:Class="QuizTable.Admin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizTable"
+        mc:Ignorable="d"
+        Title="Admin" Height="400" Width="400">
+    <Grid>
+        <Button Content="обновить таблицу" Width="100" Height="100" Click="Click"/>
+        <Button Content="следущий раунд" Width="100" Height="100" Click="Button_Click" Margin="218,103,0,13"/>
+        <Button Content="дать очки" Width="100" Height="100" Click="generationPoints" Margin="-29,48,247,68"/>
+
+        <Button Content="prev раунд" Width="100" Height="100" Click="Button_Click_1" Margin="80,247,220,37"/>
+
+    </Grid>
+</Window>
