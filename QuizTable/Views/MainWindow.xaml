@@ -23,7 +23,7 @@
     <Viewbox Stretch="Uniform">
 
         <Grid   Height="1080" Width="1920">
-            <Border HorizontalAlignment="Center" Width="1300" Height="{Binding Height}" VerticalAlignment="Center" BorderThickness="5" BorderBrush="#0d94f5" CornerRadius="30" ClipToBounds="True">
+            <Border HorizontalAlignment="Center" Width="1300" Height="{Binding Height}" VerticalAlignment="Center" BorderThickness="5" BorderBrush="#0d94f5" CornerRadius="30" ClipToBounds="True" Margin="0,68,0,0">
                 <Border.Background>
                     <VisualBrush Stretch="None"  AlignmentY="Top">
                         <VisualBrush.Visual>

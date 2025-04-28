@@ -38,6 +38,7 @@ namespace QuizTable.ViewModels
             worker.WorkerReportsProgress = true;
             worker.DoWork += Animation;
             worker.ProgressChanged += UpdateLabel;
+
         }
         #region удаление/добавленеи команд
         /// <summary>
@@ -121,7 +122,7 @@ namespace QuizTable.ViewModels
 
             foreach (var team in Teams)
             {
-                team.Tour++;
+                team.Tour--;
                 OnPropertyChanged("Teams");
             }
             return true;
