@@ -28,6 +28,11 @@ namespace QuizTable.Models
         Brush color2 = Brushes.Transparent;
         int _tour = 0;
         int _nextPosIndex;
+        public int[] PropertyForMakar
+        {
+            get => pointsInt;
+            set => pointsInt = value;
+        }
         public Team(int countTour)
         {
             _nextPosIndex = _indexTabel;
