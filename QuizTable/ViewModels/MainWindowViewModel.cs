@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Windows;
 using QuizTable.Models;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ namespace QuizTable.ViewModels
         ObservableCollection<Team> _teams = new ObservableCollection<Team>();
         int ticksAddPoint = 10;
         int tickMoveLabelTeam = 60;
-        const int COUNT_TOUR = 7;
+        public const int COUNT_TOUR = 7;
         BackgroundWorker worker = new();
 
         public Brush ColorFont{ get; set; } = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#146FE8"));
