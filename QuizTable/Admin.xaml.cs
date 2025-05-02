@@ -9,6 +9,7 @@ using QuizTable.Views;
 
 namespace QuizTable
 {
+
     public partial class Admin : Window
     {
         private Window _table = new MainWindow();
@@ -35,7 +36,6 @@ namespace QuizTable
         private void InitializeTeams()
         {
             TeamComboBox.ItemsSource = _viewModel.Teams;
-            TeamComboBox.DisplayMemberPath = "Name";
         }
 
         private void UpdateRoundComboBox()
@@ -51,7 +51,14 @@ namespace QuizTable
             }
         }
 
-
+        private void UpdateTable()
+        {
+            TeamRoundsDataGrid.Items.Clear();
+            foreach (var team in _viewModel.Teams)
+            {
+                TeamRoundsDataGrid.Items.Add(team);
+            }
+        }
         #region Управление командами
         private void AddTeam_Click(object sender, RoutedEventArgs e)
         {
@@ -59,6 +66,9 @@ namespace QuizTable
             if (!string.IsNullOrWhiteSpace(teamName))
             {
                 _viewModel.AddTeam(teamName);
+                var obj = _viewModel.Teams[^1];
+                TeamRoundsDataGrid.Items.Add(obj);
+                UpdateTable();
                 TeamComboBox.Items.Refresh();
                 SaveToCsv();
             }
@@ -70,6 +80,7 @@ namespace QuizTable
             {
                 _viewModel.RemoveTeam(selectedTeam.Name);
                 TeamComboBox.Items.Refresh();
+                UpdateTable();
                 SaveToCsv();
             }
             else
@@ -82,11 +93,12 @@ namespace QuizTable
         #region Управление баллами
         private void AddPoints_Click(object sender, RoutedEventArgs e)
         {
+
             if (TeamComboBox.SelectedItem is Team selectedTeam &&
                 int.TryParse(PointsTextBox.Text, out int points))
             {
                 _viewModel.AddPointTeam(selectedTeam.Name, points);
-                _viewModel.Update();
+                UpdateTable();
                 SaveToCsv();
             }
             else
@@ -188,5 +200,11 @@ namespace QuizTable
             }
         }
         #endregion
+        private void RoundComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.SetTour(int.Parse(RoundComboBox.SelectedItem.ToString()));
+            UpdateTable();
+        }
+
     }
 }

@@ -127,6 +127,21 @@ namespace QuizTable.ViewModels
             }
             return true;
         }
+        public bool SetTour(int tour)
+        {
+            if (Teams.Count == 0)
+                return false;
+            if (Teams[0].Tour <= 0 && Teams[0].Tour > COUNT_TOUR)
+                return false;
+            SortingParticipants();
+
+            foreach (var team in Teams)
+            {
+                team.Tour = tour - 1;
+                OnPropertyChanged("Teams");
+            }
+            return true;
+        }
         #endregion
         #region добавление/снятие очков
         /// <summary>

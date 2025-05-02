@@ -64,6 +64,9 @@ namespace QuizTable.Models
             get => _indexTabel; set { _indexTabel = value; OnPropertyChanged(nameof(IndexTabel)); }
         }
         public int Height { get; set; } 
+        public string CurrentRound { get { return (Tour + 1).ToString(); } }
+        public string TotalScoreRound { get { return (pointsInt[Tour]).ToString(); } }
+
         public int Tour
         {
             get { return _tour; }
@@ -190,6 +193,8 @@ namespace QuizTable.Models
             OnPropertyChanged("Color2");
 
         }
+        public override string ToString() => Name;
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

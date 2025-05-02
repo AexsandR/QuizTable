@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuizTable"
         mc:Ignorable="d"
         Title="QuizTable Admin" 
-        Height="500" Width="800"
+        Height="500" Width="900"
         WindowStartupLocation="CenterScreen"
         Background="#FF2D2D30"
         FontFamily="Segoe UI">
@@ -68,7 +68,7 @@
                                 ClickMode="Press">
                                 <ToggleButton.Template>
                                     <ControlTemplate>
-                                        <Border Background="{TemplateBinding Background}"
+                                        <Border Background="#FF3E3E42"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}">
                                             <Path x:Name="Arrow"
@@ -245,17 +245,18 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Команда" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Текущий тур" Binding="{Binding CurrentRound}" Width="100"/>
-                <DataGridTextColumn Header="Общий счет" Binding="{Binding TotalScore}" Width="100"/>
+                <DataGridTextColumn Header="Общий счет" Binding="{Binding TotalScoreRound}" Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Панель управления баллами -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10,10,10,0" Height="36" VerticalAlignment="Top">
             <Label Content="Команда:" Foreground="White" VerticalAlignment="Center"/>
-            <ComboBox x:Name="TeamComboBox" Width="150" DisplayMemberPath="Name" Margin="5,0,0,0"/>
+            <ComboBox x:Name="TeamComboBox" Width="150" DisplayMemberPath="Name" Margin="5,0,0,0"
+                      Background="red"/>
 
             <Label Content="Тур:" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
-            <ComboBox x:Name="RoundComboBox" Width="60" Margin="5,0,0,0"/>
+            <ComboBox x:Name="RoundComboBox" Width="60" Margin="5,0,0,0" SelectionChanged="RoundComboBox_SelectionChanged"/>
 
             <Label Content="Баллы:" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0"/>
             <TextBox x:Name="PointsTextBox" Width="60" Margin="5,0,0,0"/>
