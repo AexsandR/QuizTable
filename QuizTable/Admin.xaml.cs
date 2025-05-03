@@ -25,7 +25,6 @@ namespace QuizTable
 
             InitializeRounds();
             InitializeTeams();
-            SaveToCsv();
         }
 
         private void InitializeRounds()
@@ -99,7 +98,6 @@ namespace QuizTable
             {
                 _viewModel.AddPointTeam(selectedTeam.Name, points);
                 UpdateTable();
-                SaveToCsv();
             }
             else
             {
