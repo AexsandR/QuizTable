@@ -77,7 +77,21 @@ namespace QuizTable.ViewModels
             }
             return false;
         }
+        private void RemoveAllTeams()
+        {
+            foreach (var team in Teams)
+                RemoveTeam(team.Name);
 
+        }
+        private void AddTeam(Team team)
+        {
+            team.Pos = new Thickness(0, Height, 0, 0);
+            team.Height = HEEGHT_STEP;
+            team.IndexTabel = Teams.Count + 1;
+            Teams.Add(team);
+            Height = (_teams.Count + 1) * HEEGHT_STEP;
+            SortTeams();
+        }
         private void UpdatePosRemove(int startIndex)
         {
             for (int i = startIndex; i < Teams.Count; i++) 
@@ -266,6 +280,19 @@ namespace QuizTable.ViewModels
         {
             OnPropertyChanged("Teams");
 
+        }
+        #endregion
+        #region Загрузка/Сохранение
+        public bool Save(string path)
+        {
+            return InitTeams.Save(path, Teams.ToList());
+        }
+        public void Load(string path)
+        {
+            RemoveAllTeams();
+            var teams = InitTeams.LoadTeams(path);
+            for (int i = 0; i < teams.Count; i++)
+                AddTeam(teams[i]);
         }
         #endregion
     }

@@ -69,7 +69,6 @@ namespace QuizTable
                 TeamRoundsDataGrid.Items.Add(obj);
                 UpdateTable();
                 TeamComboBox.Items.Refresh();
-                SaveToCsv();
             }
         }
 
@@ -80,7 +79,6 @@ namespace QuizTable
                 _viewModel.RemoveTeam(selectedTeam.Name);
                 TeamComboBox.Items.Refresh();
                 UpdateTable();
-                SaveToCsv();
             }
             else
             {
@@ -109,7 +107,6 @@ namespace QuizTable
         {
             _viewModel.GenerationPoints();
             _viewModel.Update();
-            SaveToCsv();
         }
         #endregion
 
@@ -121,82 +118,11 @@ namespace QuizTable
 
         private void SaveTable_Click(object sender, RoutedEventArgs e)
         {
-            SaveToCsv();
+            _viewModel.Save(SaveFileName);
             MessageBox.Show("Таблица сохранена в файл " + SaveFileName);
         }
 
-        private void LoadTable_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (!File.Exists(SaveFileName))
-                {
-                    MessageBox.Show("Файл сохранения не найден");
-                    return;
-                }
 
-                var lines = File.ReadAllLines(SaveFileName);
-                if (lines.Length == 0) return;
-
-                var header = lines[0].Split(',');
-                UpdateRoundComboBox();
-
-                _viewModel.Teams.Clear();
-
-                for (int i = 1; i < lines.Length; i++)
-                {
-                    var parts = lines[i].Split(',');
-                    if (parts.Length < 1) continue;
-
-                    string teamName = parts[0];
-                    _viewModel.AddTeam(teamName);
-
-                    var team = _viewModel.Teams.FirstOrDefault(t => t.Name == teamName);
-                    if (team != null)
-                    {
-                        for (int j = 1; j < parts.Length && j <= team.Points.Length; j++)
-                        {
-                            if (int.TryParse(parts[j], out int p))
-                                team.Points[j - 1] = p.ToString();
-                        }
-                    }
-                }
-
-                TeamComboBox.Items.Refresh();
-                _viewModel.Update();
-                MessageBox.Show("Таблица успешно загружена из файла " + SaveFileName);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}");
-            }
-        }
-
-        private void SaveToCsv()
-        {
-            try
-            {
-                using (var writer = new StreamWriter(SaveFileName))
-                {
-                    writer.Write("Команда");
-                    for (int i = 1; i <= MainWindowViewModel.COUNT_TOUR; i++)
-                        writer.Write($",Тур {i}");
-                    writer.WriteLine();
-
-                    foreach (var team in _viewModel.Teams)
-                    {
-                        writer.Write(team.Name);
-                        for (int i = 0; i < MainWindowViewModel.COUNT_TOUR; i++)
-                            writer.Write($",{team.Points[i]}");
-                        writer.WriteLine();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка при сохранении файла: {ex.Message}");
-            }
-        }
         #endregion
         private void RoundComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -204,5 +130,12 @@ namespace QuizTable
             UpdateTable();
         }
 
+        private void LoadTable_Click(object sender, RoutedEventArgs e)
+        {
+            _viewModel.Load(SaveFileName);
+            if (_viewModel.Teams.Count > 0)
+                RoundComboBox.SelectedIndex = _viewModel.Teams[0].Tour;
+            UpdateTable();
+        }
     }
 }
