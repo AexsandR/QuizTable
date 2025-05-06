@@ -79,8 +79,8 @@ namespace QuizTable.ViewModels
         }
         private void RemoveAllTeams()
         {
-            foreach (var team in Teams)
-                RemoveTeam(team.Name);
+            Teams.Clear();
+            Height = HEEGHT_STEP;
 
         }
         private void AddTeam(Team team)
@@ -96,7 +96,7 @@ namespace QuizTable.ViewModels
         {
             for (int i = startIndex; i < Teams.Count; i++) 
             {
-                Teams[i].Pos = new Thickness(10, Teams[i].Pos.Top - HEEGHT_STEP, 10, 0);
+                Teams[i].Pos = new Thickness(0, Teams[i].Pos.Top - HEEGHT_STEP, 0, 0);
             }
         }
         #endregion

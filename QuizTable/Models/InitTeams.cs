@@ -31,8 +31,9 @@ namespace QuizTable.Models
                 {
                     if (data[j] == "")
                         continue;
+                    else if (j != 1)
+                        team.Tour++;
                     team.AddPoint(int.Parse(data[j]));
-                    team.Tour++;
                 }
                 teams.Add(team);
             }
@@ -59,7 +60,7 @@ namespace QuizTable.Models
         }
         private static string CreateHeader(int countTour)
         {
-            string header = "Команад\t";
+            string header = "Команада\t";
             for (int i = 0; i < countTour; i++)
                 header += (i + 1).ToString() + "\t";
             header += "Итог\n";

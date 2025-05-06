@@ -19,8 +19,8 @@ namespace QuizTable
         public Admin()
         {
             InitializeComponent();
-            _viewModel = new MainWindowViewModel();
-            _table = new MainWindow { DataContext = _viewModel };
+            _table = new MainWindow();
+            _viewModel = (MainWindowViewModel)_table.DataContext;
             _table.Show();
 
             InitializeRounds();

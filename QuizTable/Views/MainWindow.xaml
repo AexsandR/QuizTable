@@ -114,7 +114,7 @@
                 </Border.Background>
 
             </Border>
-            <Label Content="КВИЗ Победы" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,23,0,0" FontSize="76" FontFamily="Arial" Foreground="{Binding ColorFont}" FontWeight="Bold"/>
+            <Label Content="" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,23,0,0" FontSize="76" FontFamily="Arial" Foreground="{Binding ColorFont}" FontWeight="Bold"/>
             <Rectangle Fill="#7ac1f5" Width="190" Height="190" RadiusX="25" RadiusY="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,851,0,0"/>
             <Rectangle Fill="#7ac1f5" Width="190" Height="190" RadiusX="25" RadiusY="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,610,0,0"/>
             <Rectangle Fill="#7ac1f5" Width="190" Height="190" RadiusX="25" RadiusY="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="60,364,0,0"/>
